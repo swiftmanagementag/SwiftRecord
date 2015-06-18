@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 ark. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for SwiftRecord.
 FOUNDATION_EXPORT double SwiftRecordVersionNumber;
