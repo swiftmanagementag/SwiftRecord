@@ -15,31 +15,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        var test: TestEntity = TestEntity.create(properties: ["string":"testString", "date":NSDate(), "integer":NSNumber(integer: 5), "float":NSNumber(float: 5)]) as! TestEntity
-        println("test.string = " + test.string)
-        println("test.date = \(test.date)")
-        println("test.integer = \(test.integer)")
-        println("test.float = \(test.float)")
+        let test: TestEntity = TestEntity.create(properties: ["string":"testString", "date":NSDate(), "integer":NSNumber(integer: 5), "float":NSNumber(float: 5)]) as! TestEntity
+        print("test.string = " + test.string)
+        print("test.date = \(test.date)")
+        print("test.integer = \(test.integer)")
+        print("test.float = \(test.float)")
         test.save()
-        var testrel = TestEntityRelationship.create(properties: ["string":"someName"]) as! TestEntityRelationship
+        let testrel = TestEntityRelationship.create(properties: ["string":"someName"]) as! TestEntityRelationship
         testrel.save()
         
         SwiftRecord.generateRelationships = true
         //SwiftRecord.setUpEntities(["TestEntity":TestEntity.self,"TestEntityRelationship":TestEntityRelationship.self])
         
-        var test2 = TestEntity.create(properties: ["string":"testString2", "relationship":["string":"anotherName"],"relationships":[["string":"array1"],["string":"array2"],["string":"array3"]]]) as! TestEntity
-        println(test2.string)
-        println(test2.relationship.string)
+        let test2 = TestEntity.create(properties: ["string":"testString2", "relationship":["string":"anotherName"],"relationships":[["string":"array1"],["string":"array2"],["string":"array3"]]]) as! TestEntity
+        print(test2.string)
+        print(test2.relationship.string)
         for er in test2.relationships {
             let e = er as! TestEntityRelationship
-            println(e.string)
+            print(e.string)
         }
         test2.save()
         test2.delete()
         let dq = "date < %@"
-        println("Date Query Count: \(TestEntity.query(dq, args: NSDate()).count)")
+        print("Date Query Count: \(TestEntity.query(dq, args: NSDate()).count)")
         let q = ["string":"testString"]
-        println("Query count: \(TestEntity.query(q).count)")
+        print("Query count: \(TestEntity.query(q).count)")
         TestEntity.all(sort: "date ASC, integer DESC")
     }
 
