@@ -111,20 +111,23 @@ public class CoreDataManager {
         if !self.managedObjectContext.hasChanges {
             return false
         }
-        let error: NSErrorPointer = NSErrorPointer()
-        if (!self.managedObjectContext.save(error)) {
-            println("Unresolved error in saving context! " + error.debugDescription)
+
+        do {
+            try self.managedObjectContext.save()
+        } catch let error as NSError {
+            print("Unresolved error in saving context! " + error.debugDescription)
             return false
         }
+        
         return true
     }
     
     public func applicationDocumentsDirectory() -> NSURL {
-        return NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL
+        return NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!
     }
     
     public func applicationSupportDirectory() -> NSURL {
-        return (NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL).URLByAppendingPathComponent(self.appName)
+        return (NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!).URLByAppendingPathComponent(self.appName)
     }
     
     private var sqliteStoreURL: NSURL {
@@ -140,18 +143,23 @@ public class CoreDataManager {
     
     private func persistentStoreCoordinator(storeType: String, storeURL: NSURL?) -> NSPersistentStoreCoordinator {
         let c = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let error = NSErrorPointer()
-        if c.addPersistentStoreWithType(storeType, configuration: nil, URL: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption:true,NSInferMappingModelAutomaticallyOption:true], error: error) == nil {
-            println("ERROR WHILE CREATING PERSISTENT STORE COORDINATOR! " + error.debugDescription)
+        do {
+            try c.addPersistentStoreWithType(storeType, configuration: nil, URL: storeURL, options: [NSMigratePersistentStoresAutomaticallyOption:true, NSInferMappingModelAutomaticallyOption:true])
+        } catch let error as NSError {
+            print("ERROR WHILE CREATING PERSISTENT STORE COORDINATOR! " + error.debugDescription)
         }
         return c
     }
     
     private func createApplicationSupportDirIfNeeded(dir: NSURL) {
-        if NSFileManager.defaultManager().fileExistsAtPath(dir.absoluteString!) {
+        if NSFileManager.defaultManager().fileExistsAtPath(dir.absoluteString) {
             return
         }
-        NSFileManager.defaultManager().createDirectoryAtURL(dir, withIntermediateDirectories: true, attributes: nil, error: nil)
+        do {
+            try NSFileManager.defaultManager().createDirectoryAtURL(dir, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print("ERROR WHILE CREATING APPLICATION SUPPORT DIRECTORY! " + error.debugDescription)
+        }
     }
     // singleton
     public static let sharedManager = CoreDataManager()
@@ -171,15 +179,15 @@ public extension NSManagedObject {
         return self.all(context: NSManagedObjectContext.defaultContext)
     }
     
-    public static func all(#sort: AnyObject) -> [NSManagedObject] {
+    public static func all(sort sort: AnyObject) -> [NSManagedObject] {
         return self.all(context: NSManagedObjectContext.defaultContext, withSort:sort)
     }
     
-    public static func all(#context: NSManagedObjectContext) -> [NSManagedObject] {
+    public static func all(context context: NSManagedObjectContext) -> [NSManagedObject] {
         return self.all(context: context, withSort: nil)
     }
     
-    public static func all(#context: NSManagedObjectContext, withSort sort: AnyObject?) -> [NSManagedObject] {
+    public static func all(context context: NSManagedObjectContext, withSort sort: AnyObject?) -> [NSManagedObject] {
         return self.fetch(nil, context: context, sort: sort, limit: nil)
     }
     
@@ -237,7 +245,7 @@ public extension NSManagedObject {
         return self.count(NSManagedObjectContext.defaultContext)
     }
     
-    public static func count(#query: AnyObject, args: AnyObject...) -> Int {
+    public static func count(query query: AnyObject, args: AnyObject...) -> Int {
         let predicate = self.predicate(query, args: args)
         return self.count(query: predicate, context:NSManagedObjectContext.defaultContext)
     }
@@ -246,7 +254,7 @@ public extension NSManagedObject {
         return self.countForFetch(nil, context: context)
     }
     
-    public static func count(#query: AnyObject, context: NSManagedObjectContext) -> Int {
+    public static func count(query query: AnyObject, context: NSManagedObjectContext) -> Int {
         return self.countForFetch(self.predicate(query), context: context)
     }
     
@@ -255,15 +263,15 @@ public extension NSManagedObject {
         return self.create(context: NSManagedObjectContext.defaultContext)
     }
     
-    public static func create(#context: NSManagedObjectContext) -> NSManagedObject {
-        let o = NSEntityDescription.insertNewObjectForEntityForName(self.entityName(), inManagedObjectContext: context) as! NSManagedObject
+    public static func create(context context: NSManagedObjectContext) -> NSManagedObject {
+        let o = NSEntityDescription.insertNewObjectForEntityForName(self.entityName(), inManagedObjectContext: context) as NSManagedObject
         if let idprop = self.autoIncrementingId() {
             o.setPrimitiveValue(NSNumber(integer: self.nextId()), forKey: idprop)
         }
         return o
     }
     
-    public static func create(#properties: [String:AnyObject]) -> NSManagedObject {
+    public static func create(properties properties: [String:AnyObject]) -> NSManagedObject {
         return self.create(properties, context: NSManagedObjectContext.defaultContext)
     }
     
@@ -284,7 +292,7 @@ public extension NSManagedObject {
     
     public static func nextId() -> Int {
         let key = "SwiftRecord-" + self.entityName() + "-ID"
-        if let idprop = self.autoIncrementingId() {
+        if let _ = self.autoIncrementingId() {
             let id = NSUserDefaults.standardUserDefaults().integerForKey(key)
             NSUserDefaults.standardUserDefaults().setInteger(id + 1, forKey: key)
             return id
@@ -331,16 +339,16 @@ public extension NSManagedObject {
     public static func entityName() -> String {
         var name = NSStringFromClass(self)
         if name.rangeOfString(".") != nil {
-            let comp = split(name) {$0 == "."}
+            let comp = split(name.characters) {$0 == "."}.map { String($0) }
             if comp.count > 1 {
                 name = comp.last!
             }
         }
         if name.rangeOfString("_") != nil {
-            var comp = split(name) {$0 == "_"}
+            var comp = split(name.characters) {$0 == "_"}.map { String($0) }
             var last: String = ""
             var remove = -1
-            for (i,s) in enumerate(comp.reverse()) {
+            for (i,s) in comp.reverse().enumerate() {
                 if last == s {
                     remove = i
                 }
@@ -366,7 +374,7 @@ public extension NSManagedObject {
             let localKey = self.keyForRemoteKey(key, context: context)
             if attrs[localKey] != nil {
                 transformed[localKey] = value
-            } else if let rel = rels[localKey] as? NSRelationshipDescription {
+            } else if let rel = rels[localKey] {
                 if SwiftRecord.generateRelationships {
                     if rel.toMany {
                         if let array = value as? [[String:AnyObject]] {
@@ -417,7 +425,7 @@ public extension NSManagedObject {
     }
     
     private static func sortDescriptor(o: AnyObject) -> NSSortDescriptor {
-        if let s = o as? String {
+        if let _ = o as? String {
             return self.sortDescriptor(o)
         }
         if let d = o as? NSSortDescriptor {
@@ -436,7 +444,7 @@ public extension NSManagedObject {
     
     private static func sortDescriptor(string: String) -> NSSortDescriptor {
         var key = string
-        let components = split(string) {$0 == " "}
+        let components = split(string.characters) {$0 == " "}.map { String($0) }
         var isAscending = true
         if (components.count > 1) {
             key = components[0]
@@ -459,7 +467,7 @@ public extension NSManagedObject {
     }
     
     private static func sortDescriptors(s: String) -> [NSSortDescriptor]{
-        let components = split(s) {$0 == ","}
+        let components = split(s.characters) {$0 == ","}.map { String($0) }
         var ds = [NSSortDescriptor]()
         for sub in components {
             ds.append(self.sortDescriptor(sub))
@@ -499,8 +507,24 @@ public extension NSManagedObject {
         if let lim = limit {
             request.fetchLimit = lim
         }
+
+        var result : [NSManagedObject]
         
-        return context.executeFetchRequest(request, error: nil) as! [NSManagedObject]
+        do {
+            var fetchResult : [AnyObject]
+            try fetchResult = context.executeFetchRequest(request)
+            
+            if let fetchResultTyped = fetchResult as? [NSManagedObject] {
+                result = fetchResultTyped
+            } else {
+                throw NSError(domain: "Fetch results unable to be casted to [NSManagedObject]", code: 0, userInfo: nil)
+            }
+        } catch let error as NSError {
+            print("Error executing fetch request \(request): " + error.description)
+            result = [NSManagedObject]()
+        }
+        
+        return result
     }
     
     private static func countForFetch(predicate: NSPredicate?, context: NSManagedObjectContext) -> Int {
@@ -521,15 +545,15 @@ public extension NSManagedObject {
             return true
         }
         
-        let error = NSErrorPointer()
-        let save = self.managedObjectContext!.save(error)
-        
-        if (!save) {
-            println("Unresolved error in saving context for entity:")
-            println(self)
-            println("!\nError: " + error.debugDescription)
+        do {
+            try self.managedObjectContext!.save()
+        } catch let error as NSError {
+            print("Unresolved error in saving context for entity:")
+            print(self)
+            print("!\nError: " + error.debugDescription)
             return false
         }
+        
         return true
     }
     
@@ -539,7 +563,7 @@ public extension NSManagedObject {
             return
         }
         let val: AnyObject = value!
-        if let attr = self.entity.attributesByName[key] as? NSAttributeDescription {
+        if let attr = self.entity.attributesByName[key] {
             let attrType = attr.attributeType
             if attrType == NSAttributeType.StringAttributeType && value is NSNumber {
                 self.setPrimitiveValue((val as! NSNumber).stringValue, forKey: key)
@@ -587,7 +611,7 @@ public extension NSManagedObject {
         }
         let entity = NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: context)!
         let properties = entity.propertiesByName
-        if properties[entity.propertiesByName] != nil {
+        if properties[remote] != nil {
             _cachedMappings![remote] = remote
             return remote
         }
@@ -622,9 +646,9 @@ public extension NSManagedObject {
         if cls == nil {
             cls = (NSClassFromString(rel.destinationEntity!.managedObjectClassName) as! NSManagedObject.Type)
         } else {
-            println("Got class name from entity setup")
+            print("Got class name from entity setup")
         }
-        var set = NSMutableSet()
+        let set = NSMutableSet()
         for d in array {
             set.addObject(cls!.findOrCreate(d, context: context))
         }
@@ -632,9 +656,9 @@ public extension NSManagedObject {
     }
     
     private static func generateObject(rel: NSRelationshipDescription, dict: [String:AnyObject], context: NSManagedObjectContext) -> NSManagedObject {
-        var entity = rel.destinationEntity!
+        let entity = rel.destinationEntity!
         
-        var cls: NSManagedObject.Type = NSClassFromString(entity.managedObjectClassName) as! NSManagedObject.Type
+        let cls: NSManagedObject.Type = NSClassFromString(entity.managedObjectClassName) as! NSManagedObject.Type
         return cls.findOrCreate(dict, context: context)
     }
     
@@ -646,9 +670,9 @@ public extension NSManagedObject {
 
 private extension String {
     var camelCase: String {
-        let spaced = self.stringByReplacingOccurrencesOfString("_", withString: " ", options: nil, range:Range<String.Index>(start: self.startIndex, end: self.endIndex))
+        let spaced = self.stringByReplacingOccurrencesOfString("_", withString: " ", options: [], range:Range<String.Index>(start: self.startIndex, end: self.endIndex))
         let capitalized = spaced.capitalizedString
-        let spaceless = capitalized.stringByReplacingOccurrencesOfString(" ", withString: "", options:nil, range:Range<String.Index>(start:self.startIndex, end:self.endIndex))
+        let spaceless = capitalized.stringByReplacingOccurrencesOfString(" ", withString: "", options:[], range:Range<String.Index>(start:self.startIndex, end:self.endIndex))
         return spaceless.stringByReplacingCharactersInRange(Range<String.Index>(start:spaceless.startIndex, end:spaceless.startIndex.successor()), withString: "\(spaceless[spaceless.startIndex])".lowercaseString)
     }
 }
@@ -657,9 +681,9 @@ extension NSObject {
     // create a static method to get a swift class for a string name
     class func swiftClassFromString(className: String) -> AnyClass! {
         // get the project name
-        if  var appName: String? = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as? String {
+        if  let appName: String? = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as? String {
             // generate the full name of your class (take a look into your "YourProject-swift.h" file)
-            let classStringName = "_TtC\(count(appName!.utf16))\(appName)\(count(className))\(className)"
+            let classStringName = "_TtC\(appName!.utf16.count)\(appName)\(className.characters.count)\(className)"
             // return the class!
             
             return NSClassFromString(classStringName)

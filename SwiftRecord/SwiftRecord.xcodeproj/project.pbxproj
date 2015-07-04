@@ -275,7 +275,8 @@
 		B88BC3211AFCD1EE00D3ECF7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = ark;
 				TargetAttributes = {
 					B88BC3291AFCD1EE00D3ECF7 = {
@@ -414,6 +415,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -491,6 +493,7 @@
 				INFOPLIST_FILE = SwiftRecord/Info.plist;
 				INSTALL_PATH = "$(PROJECT_DIR)/..";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
@@ -508,6 +511,7 @@
 				INFOPLIST_FILE = SwiftRecord/Info.plist;
 				INSTALL_PATH = "$(PROJECT_DIR)/..";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
@@ -528,6 +532,7 @@
 				);
 				INFOPLIST_FILE = SwiftRecordTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -541,6 +546,7 @@
 				);
 				INFOPLIST_FILE = SwiftRecordTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -563,6 +569,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftRecord;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -582,6 +589,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftRecord;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -604,6 +612,7 @@
 				INFOPLIST_FILE = SwiftRecordOSXTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -620,6 +629,7 @@
 				INFOPLIST_FILE = SwiftRecordOSXTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
@@ -644,6 +654,7 @@
 				B88BC3421AFCD1EE00D3ECF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B88BC3431AFCD1EE00D3ECF7 /* Build configuration list for PBXNativeTarget "SwiftRecordTests" */ = {
 			isa = XCConfigurationList;
@@ -652,6 +663,7 @@
 				B88BC3451AFCD1EE00D3ECF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B88BC3861AFD15D900D3ECF7 /* Build configuration list for PBXNativeTarget "SwiftRecordOSX" */ = {
 			isa = XCConfigurationList;
@@ -660,6 +672,7 @@
 				B88BC3881AFD15D900D3ECF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B88BC3891AFD15D900D3ECF7 /* Build configuration list for PBXNativeTarget "SwiftRecordOSXTests" */ = {
 			isa = XCConfigurationList;
@@ -668,6 +681,7 @@
 				B88BC38B1AFD15D900D3ECF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
