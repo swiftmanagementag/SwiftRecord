@@ -72,6 +72,7 @@ Drag and drop either `Classes/SwiftRecord.swift` or `SwiftRecord.framework` into
 	```swift
 	import SwiftRecord
 	
+	@objc(Event)
 	class Event: NSManagedObject {
 		@NSManaged var eventID: NSNumber
 		@NSManaged var name: String
