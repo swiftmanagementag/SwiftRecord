@@ -339,13 +339,14 @@ public extension NSManagedObject {
     public static func entityName() -> String {
         var name = NSStringFromClass(self)
         if name.rangeOfString(".") != nil {
-            let comp = split(name.characters) {$0 == "."}.map { String($0) }
+            
+            let comp = name.characters.split {$0 == "."}.map { String($0) }
             if comp.count > 1 {
                 name = comp.last!
             }
         }
         if name.rangeOfString("_") != nil {
-            var comp = split(name.characters) {$0 == "_"}.map { String($0) }
+            var comp = name.characters.split {$0 == "_"}.map { String($0) }
             var last: String = ""
             var remove = -1
             for (i,s) in comp.reverse().enumerate() {
@@ -356,7 +357,7 @@ public extension NSManagedObject {
             }
             if remove > -1 {
                 comp.removeAtIndex(remove)
-                name = "_".join(comp)
+                name = comp.joinWithSeparator("_")
             }
         }
         return name
@@ -444,7 +445,7 @@ public extension NSManagedObject {
     
     private static func sortDescriptor(string: String) -> NSSortDescriptor {
         var key = string
-        let components = split(string.characters) {$0 == " "}.map { String($0) }
+        let components = string.characters.split {$0 == " "}.map { String($0) }
         var isAscending = true
         if (components.count > 1) {
             key = components[0]
@@ -467,7 +468,7 @@ public extension NSManagedObject {
     }
     
     private static func sortDescriptors(s: String) -> [NSSortDescriptor]{
-        let components = split(s.characters) {$0 == ","}.map { String($0) }
+        let components = s.characters.split {$0 == ","}.map { String($0) }
         var ds = [NSSortDescriptor]()
         for sub in components {
             ds.append(self.sortDescriptor(sub))
