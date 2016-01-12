@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
-import SwiftRecord
+
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let te = TestEntity.findOrCreate(["string":"testString","date":NSDate()]) as! TestEntity
+        print("te.string = " + te.string)
         let test: TestEntity = TestEntity.create(properties: ["string":"testString", "date":NSDate(), "integer":NSNumber(integer: 5), "float":NSNumber(float: 5)]) as! TestEntity
         print("test.string = " + test.string)
         print("test.date = \(test.date)")

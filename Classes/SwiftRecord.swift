@@ -8,6 +8,9 @@
 
 import Foundation
 import CoreData
+#if os(iOS)
+import UIKit
+#endif
 
 public class SwiftRecord {
     
@@ -18,9 +21,6 @@ public class SwiftRecord {
     }
     
     private static var nameToEntities: [String:NSManagedObject.Type] = [String:NSManagedObject.Type]()
-}
-
-public class CoreDataManager {
     
     public let appName = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String
     
@@ -93,12 +93,17 @@ public class CoreDataManager {
     private var _persistentStoreCoordinator: NSPersistentStoreCoordinator?
     
     public var managedObjectModel: NSManagedObjectModel {
-        if let m = _managedObjectModel {
-            return m
-        } else {
-            let modelURL = NSBundle.mainBundle().URLForResource(self.modelName, withExtension: "momd")
-            _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL!)
-            return _managedObjectModel!
+        get {
+            if let m = _managedObjectModel {
+                return m
+            } else {
+                let modelURL = NSBundle.mainBundle().URLForResource(self.modelName, withExtension: "momd")
+                _managedObjectModel = NSManagedObjectModel(contentsOfURL: modelURL!)
+                return _managedObjectModel!
+            }
+        }
+        set {
+            _managedObjectModel = newValue
         }
     }
     private var _managedObjectModel: NSManagedObjectModel?
@@ -130,7 +135,7 @@ public class CoreDataManager {
         return (NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!).URLByAppendingPathComponent(self.appName)
     }
     
-    private var sqliteStoreURL: NSURL {
+    public var sqliteStoreURL: NSURL {
         #if os(iOS)
             let dir = self.applicationDocumentsDirectory()
         #else
@@ -161,13 +166,24 @@ public class CoreDataManager {
             print("ERROR WHILE CREATING APPLICATION SUPPORT DIRECTORY! " + error.debugDescription)
         }
     }
+    private init() {
+        #if os(iOS)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate", name: UIApplicationWillTerminateNotification, object: nil)
+        #endif
+    }
+    public func applicationWillTerminate() {
+    #if os(iOS)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        saveContext()
+    #endif
+    }
     // singleton
-    public static let sharedManager = CoreDataManager()
+    public static let sharedRecord = SwiftRecord()
 }
 
 public extension NSManagedObjectContext {
     public static var defaultContext: NSManagedObjectContext {
-        return CoreDataManager.sharedManager.managedObjectContext
+        return SwiftRecord.sharedRecord.managedObjectContext
     }
 }
 
@@ -314,6 +330,16 @@ public extension NSManagedObject {
         }
     }
     
+    public static func save() -> Bool {
+        do {
+            try NSManagedObjectContext.defaultContext.save()
+            return true
+        } catch let e as NSError {
+            print("Save Error: \(e)")
+            return false
+        }
+    }
+    
     public func save() -> Bool {
         return self.saveTheContext()
     }
@@ -382,16 +408,16 @@ public extension NSManagedObject {
                             transformed[localKey] = self.generateSet(rel, array: array, context: context)
                         } else {
                             #if DEBUG
-                                println("Invalid value for relationship generation in \(NSStringFromClass(self)).\(localKey)")
-                                println(value)
+                                print("Invalid value for relationship generation in \(NSStringFromClass(self)).\(localKey)")
+                                print(value)
                             #endif
                         }
                     } else if let dict = value as? [String:AnyObject] {
                         transformed[localKey] = self.generateObject(rel, dict: dict, context: context)
                     } else {
                         #if DEBUG
-                            println("Invalid value for relationship generation in \(NSStringFromClass(self)).\(localKey)")
-                            println(value)
+                            print("Invalid value for relationship generation in \(NSStringFromClass(self)).\(localKey)")
+                            print(value)
                         #endif
                     }
                 }

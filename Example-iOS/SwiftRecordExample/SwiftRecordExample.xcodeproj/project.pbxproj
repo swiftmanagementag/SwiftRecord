@@ -7,27 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B86E043D1B0D84D0004DECF0 /* SwiftRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B86E043C1B0D84D0004DECF0 /* SwiftRecord.framework */; };
+		2C9725541C45C0DD004034AA /* SwiftRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9725531C45C0DD004034AA /* SwiftRecord.swift */; };
 		B8E0EFC31AFCA69600272D7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0EFC21AFCA69600272D7E /* AppDelegate.swift */; };
 		B8E0EFC61AFCA69600272D7E /* SwiftRecordExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8E0EFC41AFCA69600272D7E /* SwiftRecordExample.xcdatamodeld */; };
 		B8E0EFC81AFCA69600272D7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0EFC71AFCA69600272D7E /* ViewController.swift */; };
 		B8E0EFCB1AFCA69600272D7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8E0EFC91AFCA69600272D7E /* Main.storyboard */; };
 		B8E0EFCD1AFCA69600272D7E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8E0EFCC1AFCA69600272D7E /* Images.xcassets */; };
 		B8E0EFD01AFCA69600272D7E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8E0EFCE1AFCA69600272D7E /* LaunchScreen.xib */; };
-		B8E0EFDC1AFCA69600272D7E /* SwiftRecordExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0EFDB1AFCA69600272D7E /* SwiftRecordExampleTests.swift */; };
 		B8E0EFE81AFCA7F900272D7E /* TestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0EFE71AFCA7F900272D7E /* TestEntity.swift */; };
 		B8E0EFEA1AFCA7FA00272D7E /* TestEntityRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E0EFE91AFCA7FA00272D7E /* TestEntityRelationship.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B8E0EFD61AFCA69600272D7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B8E0EFB51AFCA69600272D7E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B8E0EFBC1AFCA69600272D7E;
-			remoteInfo = SwiftRecordExample;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B8E0EFEE1AFCAB2D00272D7E /* CopyFiles */ = {
@@ -42,7 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B86E043C1B0D84D0004DECF0 /* SwiftRecord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftRecord.framework; sourceTree = "<group>"; };
+		2C9725531C45C0DD004034AA /* SwiftRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftRecord.swift; path = /Users/zin/Documents/opensource/SwiftRecord/SwiftRecord/SwiftRecord/../../Classes/SwiftRecord.swift; sourceTree = "<absolute>"; };
 		B8E0EFBD1AFCA69600272D7E /* SwiftRecordExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftRecordExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E0EFC11AFCA69600272D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8E0EFC21AFCA69600272D7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,7 +40,6 @@
 		B8E0EFCA1AFCA69600272D7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8E0EFCC1AFCA69600272D7E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8E0EFCF1AFCA69600272D7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B8E0EFD51AFCA69600272D7E /* SwiftRecordExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftRecordExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E0EFDA1AFCA69600272D7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8E0EFDB1AFCA69600272D7E /* SwiftRecordExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRecordExampleTests.swift; sourceTree = "<group>"; };
 		B8E0EFE71AFCA7F900272D7E /* TestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestEntity.swift; sourceTree = "<group>"; };
@@ -64,14 +52,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		B8E0EFBA1AFCA69600272D7E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B86E043D1B0D84D0004DECF0 /* SwiftRecord.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8E0EFD21AFCA69600272D7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -96,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				B8E0EFBD1AFCA69600272D7E /* SwiftRecordExample.app */,
-				B8E0EFD51AFCA69600272D7E /* SwiftRecordExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,7 +83,7 @@
 		B8E0EFBF1AFCA69600272D7E /* SwiftRecordExample */ = {
 			isa = PBXGroup;
 			children = (
-				B86E043C1B0D84D0004DECF0 /* SwiftRecord.framework */,
+				2C9725531C45C0DD004034AA /* SwiftRecord.swift */,
 				B8E0EFC21AFCA69600272D7E /* AppDelegate.swift */,
 				B8E0EFC71AFCA69600272D7E /* ViewController.swift */,
 				B8E0EFC91AFCA69600272D7E /* Main.storyboard */,
@@ -198,24 +177,6 @@
 			productReference = B8E0EFBD1AFCA69600272D7E /* SwiftRecordExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B8E0EFD41AFCA69600272D7E /* SwiftRecordExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B8E0EFE21AFCA69600272D7E /* Build configuration list for PBXNativeTarget "SwiftRecordExampleTests" */;
-			buildPhases = (
-				B8E0EFD11AFCA69600272D7E /* Sources */,
-				B8E0EFD21AFCA69600272D7E /* Frameworks */,
-				B8E0EFD31AFCA69600272D7E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B8E0EFD71AFCA69600272D7E /* PBXTargetDependency */,
-			);
-			name = SwiftRecordExampleTests;
-			productName = SwiftRecordExampleTests;
-			productReference = B8E0EFD51AFCA69600272D7E /* SwiftRecordExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -228,10 +189,6 @@
 				TargetAttributes = {
 					B8E0EFBC1AFCA69600272D7E = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					B8E0EFD41AFCA69600272D7E = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = B8E0EFBC1AFCA69600272D7E;
 					};
 				};
 			};
@@ -249,7 +206,6 @@
 			projectRoot = "";
 			targets = (
 				B8E0EFBC1AFCA69600272D7E /* SwiftRecordExample */,
-				B8E0EFD41AFCA69600272D7E /* SwiftRecordExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -265,13 +221,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8E0EFD31AFCA69600272D7E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -281,29 +230,14 @@
 			files = (
 				B8E0EFE81AFCA7F900272D7E /* TestEntity.swift in Sources */,
 				B8E0EFEA1AFCA7FA00272D7E /* TestEntityRelationship.swift in Sources */,
+				2C9725541C45C0DD004034AA /* SwiftRecord.swift in Sources */,
 				B8E0EFC81AFCA69600272D7E /* ViewController.swift in Sources */,
 				B8E0EFC31AFCA69600272D7E /* AppDelegate.swift in Sources */,
 				B8E0EFC61AFCA69600272D7E /* SwiftRecordExample.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8E0EFD11AFCA69600272D7E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B8E0EFDC1AFCA69600272D7E /* SwiftRecordExampleTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B8E0EFD71AFCA69600272D7E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B8E0EFBC1AFCA69600272D7E /* SwiftRecordExample */;
-			targetProxy = B8E0EFD61AFCA69600272D7E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B8E0EFC91AFCA69600272D7E /* Main.storyboard */ = {
@@ -443,46 +377,6 @@
 			};
 			name = Release;
 		};
-		B8E0EFE31AFCA69600272D7E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(PROJECT_DIR)/SwiftRecordExample",
-					/Users/zaid/Documents/ark/SwiftRecord,
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SwiftRecordExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftRecordExample.app/SwiftRecordExample";
-			};
-			name = Debug;
-		};
-		B8E0EFE41AFCA69600272D7E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(PROJECT_DIR)/SwiftRecordExample",
-					/Users/zaid/Documents/ark/SwiftRecord,
-				);
-				INFOPLIST_FILE = SwiftRecordExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ark.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftRecordExample.app/SwiftRecordExample";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -500,15 +394,6 @@
 			buildConfigurations = (
 				B8E0EFE01AFCA69600272D7E /* Debug */,
 				B8E0EFE11AFCA69600272D7E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B8E0EFE21AFCA69600272D7E /* Build configuration list for PBXNativeTarget "SwiftRecordExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B8E0EFE31AFCA69600272D7E /* Debug */,
-				B8E0EFE41AFCA69600272D7E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
