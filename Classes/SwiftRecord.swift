@@ -171,7 +171,7 @@ public class SwiftRecord {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate", name: UIApplicationWillTerminateNotification, object: nil)
         #endif
     }
-    public func applicationWillTerminate() {
+    @objc public func applicationWillTerminate() {
     #if os(iOS)
         NSNotificationCenter.defaultCenter().removeObserver(self)
         saveContext()
