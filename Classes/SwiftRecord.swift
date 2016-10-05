@@ -132,7 +132,7 @@ public class SwiftRecord {
     }
     
     public func applicationSupportDirectory() -> NSURL {
-        return (NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!).URLByAppendingPathComponent(self.appName)
+        return (NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.ApplicationSupportDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!).URLByAppendingPathComponent(self.appName)!
     }
     
     public var sqliteStoreURL: NSURL {
@@ -142,7 +142,7 @@ public class SwiftRecord {
             let dir = self.applicationSupportDirectory()
             self.createApplicationSupportDirIfNeeded(dir)
         #endif
-        return dir.URLByAppendingPathComponent(self.databaseName)
+        return dir.URLByAppendingPathComponent(self.databaseName)!
         
     }
     
@@ -157,7 +157,7 @@ public class SwiftRecord {
     }
     
     private func createApplicationSupportDirIfNeeded(dir: NSURL) {
-        if NSFileManager.defaultManager().fileExistsAtPath(dir.absoluteString) {
+        if NSFileManager.defaultManager().fileExistsAtPath(dir.absoluteString!) {
             return
         }
         do {
@@ -168,7 +168,7 @@ public class SwiftRecord {
     }
     private init() {
         #if os(iOS)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationWillTerminate", name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SwiftRecord.applicationWillTerminate), name: UIApplicationWillTerminateNotification, object: nil)
         #endif
     }
     @objc public func applicationWillTerminate() {
@@ -558,13 +558,13 @@ public extension NSManagedObject {
         let request = self.createFetchRequest(context)
         request.predicate = predicate
         
-        return context.countForFetchRequest(request, error: nil)
+        return try! context.countForFetchRequest(request)
     }
     
     private static func count(predicate: NSPredicate, context: NSManagedObjectContext) -> Int {
         let request = self.createFetchRequest(context)
         request.predicate = predicate
-        return context.countForFetchRequest(request, error: nil)
+        return try! context.countForFetchRequest(request)
     }
     
     private func saveTheContext() -> Bool {
