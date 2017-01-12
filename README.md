@@ -17,13 +17,11 @@ Easy creates, saves, deletes and queries. Do it using:
 
 Now supports setting an autoincrementing ID for your `NSManagedObject` subclasses
 
-This library also reads in your json dictionaries for you. Includes automatic camelCase changing ie `first_name` from server to `firstName` locally. You can customize the dictionary mappings too. Read more in the [mapping section](#mapping). 
+This library also reads in your json dictionaries for you. Includes automatic camelCase changing ie `first_name` from server to `firstName` locally. You can customize the dictionary mappings too. Read more in the [mapping section](#mapping).
 
 Object relationships are also generated from dictionaries, but disabled by default. Set `SwiftRecord.generateRelationships` to true to enable this feature. See the [relationships section](#relationships)
 
 Visit [ark](http://www.arkverse.com) for a more [beginner friendly guide to SwiftRecord](http://www.arkverse.com/swiftrecord-easy-core-data-written-in-swift/)
-
-[Check out our UIClosures library too](https://github.com/arkverse/UIClosures)
 
 if you love SwiftRecord, tweet it!
 <a href="https://twitter.com/intent/tweet?text=SwiftRecord%3A+an+amazing+swift+Core+Data+library&url=https%3A%2F%2Fgithub.com%2Farkverse%2FSwiftRecord&hashtags=ios%2Cswift%2Ccoredata&original_referer=http%3A%2F%2Fgithub.com%2F&tw_p=tweetbutton" target="_blank">
@@ -47,10 +45,10 @@ if you love SwiftRecord, tweet it!
 
 #### via [CocoaPods](http://cocoapods.org)
 1. Edit your Podfile to use frameworks and add SwiftRecord:
-		
+
 		platform :ios, '8.0'
 		use_frameworks!
-	
+
 		pod 'SwiftRecord'
 2. run `pod install`
 
@@ -58,8 +56,8 @@ if you love SwiftRecord, tweet it!
 
 1. Just add SwiftRecord to your Cartfile:
 
-	github "arkverse/SwiftRecord" >= 0.0.5
-	
+	github "arkverse/SwiftRecord" >= 0.0.6
+
 2. and run `carthage update`
 
 #### Manual Installation
@@ -71,7 +69,7 @@ Drag and drop either `Classes/SwiftRecord.swift` or `SwiftRecord.framework` into
 
 	```swift
 	import SwiftRecord
-	
+
 	@objc(Event)
 	class Event: NSManagedObject {
 		@NSManaged var eventID: NSNumber
@@ -87,7 +85,7 @@ Drag and drop either `Classes/SwiftRecord.swift` or `SwiftRecord.framework` into
 ### create, save & delete:
 
 ```swift
-var event = Event.create() as! Event // Downcasts are necessary, 
+var event = Event.create() as! Event // Downcasts are necessary,
 event.type = "Birthday"
 event.when = NSDate()
 event.save() // simple save
@@ -197,7 +195,7 @@ override class func mappings() -> [String:String] {
 While it is advised against, you can have your NSManagedObject relationships in your dictionaries and they will be filled, but first you must enable it by setting:
 
 	SwiftRecord.generateRelationships = true
-	
+
 Once this is set, you rels will be filled, ie:
 
 ```swift
