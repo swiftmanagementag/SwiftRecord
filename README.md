@@ -3,7 +3,7 @@
 [pd]: http://cocoadocs.org/docsets/SwiftRecord
 by [ark](http://www.arkverse.com). tweet [@arkverse](https://twitter.com/arkverse) for any feature requests. Feedback is greatly appreciated!
 
-##About
+## About
 
 ActiveRecord style Core Data object management. Tremendously convenient and easy to use. Necessary for any and every Core Data project.
 
