@@ -9,27 +9,25 @@
 import Foundation
 import UIKit
 
-
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let te = TestEntity.findOrCreate(["string":"testString","date":NSDate()]) as! TestEntity
+        let te = TestEntity.findOrCreate(["string": "testString", "date": NSDate()]) as! TestEntity
         print("te.string = " + te.string)
-        let test: TestEntity = TestEntity.create(properties: ["string":"testString", "date":NSDate(), "integer":NSNumber(integer: 5), "float":NSNumber(float: 5)]) as! TestEntity
+        let test: TestEntity = TestEntity.create(properties: ["string": "testString", "date": NSDate(), "integer": NSNumber(integer: 5), "float": NSNumber(float: 5)]) as! TestEntity
         print("test.string = " + test.string)
         print("test.date = \(test.date)")
         print("test.integer = \(test.integer)")
         print("test.float = \(test.float)")
         test.save()
-        let testrel = TestEntityRelationship.create(properties: ["string":"someName"]) as! TestEntityRelationship
+        let testrel = TestEntityRelationship.create(properties: ["string": "someName"]) as! TestEntityRelationship
         testrel.save()
-        
+
         SwiftRecord.generateRelationships = true
-        //SwiftRecord.setUpEntities(["TestEntity":TestEntity.self,"TestEntityRelationship":TestEntityRelationship.self])
-        
-        let test2 = TestEntity.create(properties: ["string":"testString2", "relationship":["string":"anotherName"],"relationships":[["string":"array1"],["string":"array2"],["string":"array3"]]]) as! TestEntity
+        // SwiftRecord.setUpEntities(["TestEntity":TestEntity.self,"TestEntityRelationship":TestEntityRelationship.self])
+
+        let test2 = TestEntity.create(properties: ["string": "testString2", "relationship": ["string": "anotherName"], "relationships": [["string": "array1"], ["string": "array2"], ["string": "array3"]]]) as! TestEntity
         print(test2.string)
         print(test2.relationship.string)
         for er in test2.relationships {
@@ -40,7 +38,7 @@ class ViewController: UIViewController {
         test2.delete()
         let dq = "date < %@"
         print("Date Query Count: \(TestEntity.query(dq, args: NSDate()).count)")
-        let q = ["string":"testString"]
+        let q = ["string": "testString"]
         print("Query count: \(TestEntity.query(q).count)")
         TestEntity.all(sort: "date ASC, integer DESC")
     }
@@ -49,7 +47,4 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-
