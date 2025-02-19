@@ -23,4 +23,9 @@ let package = Package(
             name: "SwiftRecord"
 			)
 	]
+	targets: [
+		.target(
+			name: "SwiftRecord",
+			path: "SwiftRecord"),
+	]
 )
