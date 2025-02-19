@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A9186DE2D66018F0002560D /* SwiftRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9186DB2D66018F0002560D /* SwiftRecord.swift */; };
+		0A9186DF2D6610220002560D /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9186DA2D66017D0002560D /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A9186DF2D6610220002560D /* Package.swift in Sources */,
 				0A9186DE2D66018F0002560D /* SwiftRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

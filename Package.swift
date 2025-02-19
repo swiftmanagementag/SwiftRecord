@@ -17,8 +17,6 @@ let package = Package(
         ),
     ],
 	targets: [
-		.target(
-			name: "SwiftRecord")
-		]
+		.target(name: "SwiftRecord")
 	]
 )
