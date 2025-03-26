@@ -18,6 +18,6 @@ This library also reads in your json dictionaries for you. Includes automatic ca
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.9"
   s.source       = { :git => "https://github.com/arkverse/SwiftRecord.git", :tag => "v#{s.version}" }
-  s.source_files  = "Classes", "Classes/**/*.{swift}"
+  s.source_files  = "Sources", "Sources/**/*.{swift}"
   s.requires_arc = true
 end
